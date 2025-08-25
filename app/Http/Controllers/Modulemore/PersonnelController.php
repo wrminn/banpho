@@ -66,7 +66,8 @@ class PersonnelController extends Controller
             ->where('personnel_menu', $menuId)
             ->first();
 
-        $seq = $latestRecord['personnel_seq'] + 1 ?? '1';
+        $seq = ($latestRecord['personnel_seq'] ?? 0) + 1;
+
 
         $id = DB::table('personnel')->insertGetId([
             'personnel_name' => $request->name,
