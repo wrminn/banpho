@@ -56,6 +56,24 @@ class BannerController extends Controller
         ]);
 
 
+        // if ($request->hasFile('topic_picture')) {
+
+        //     $file = $request->file('topic_picture');
+        //     $ext = $file->getClientOriginalExtension();
+
+        //     // สร้างชื่อกลาง
+        //     $timestamp = now()->format('Ymd_His');
+
+        //     $folder = "/content/{$menuId}";
+        //     $filename = "{$id}_topicbanner_{$timestamp}.{$ext}";
+        //     $path = $file->storeAs($folder, $filename, 'public');
+
+        //     DB::table('banner')->where('banner_id', $id)
+        //         ->update([
+        //             'banner_topic_picture' => $path
+        //         ]);
+        // }
+
         if ($request->hasFile('topic_picture')) {
 
             $file = $request->file('topic_picture');
@@ -64,15 +82,33 @@ class BannerController extends Controller
             // สร้างชื่อกลาง
             $timestamp = now()->format('Ymd_His');
 
-            $folder = "/content/{$menuId}";
-            $filename = "{$id}_topicbanner_{$timestamp}.{$ext}";
+            $folder = "content/{$menuId}"; // path ใน disk 'public'
+            $filename = "{$id}_banner_{$timestamp}.{$ext}";
+
+            // บันทึกไฟล์เข้า storage/app/public/content/{menuId}
             $path = $file->storeAs($folder, $filename, 'public');
 
+            // ตั้ง permission ให้ไฟล์ใหม่
+            $fullPath = storage_path('app/public/' . $path);
+            if (file_exists($fullPath)) {
+                chmod($fullPath, 0644);
+            }
+
+            // สำหรับ host ที่ symlink ไม่ทำงาน → copy ไป public/storage
+            $publicStoragePath = public_path('storage/' . $path);
+            if (!file_exists(dirname($publicStoragePath))) {
+                mkdir(dirname($publicStoragePath), 0775, true);
+            }
+            copy($fullPath, $publicStoragePath);
+            chmod($publicStoragePath, 0644);
+
+            // บันทึก path ลง database
             DB::table('banner')->where('banner_id', $id)
                 ->update([
                     'banner_topic_picture' => $path
                 ]);
         }
+
 
         return redirect('backend/banner/menu/' . $menuId);
     }
@@ -101,6 +137,26 @@ class BannerController extends Controller
                 'banner_date_update' => now()
             ]);
 
+        // if ($request->hasFile('topic_picture')) {
+
+        //     $file = $request->file('topic_picture');
+        //     $ext = $file->getClientOriginalExtension();
+
+        //     // สร้างชื่อกลาง
+        //     $timestamp = now()->format('Ymd_His');
+
+        //     $folder = "/content/{$menuId}";
+        //     $filename = "{$id}_banner_{$timestamp}.{$ext}";
+        //     $path = $file->storeAs($folder, $filename, 'public');
+
+
+        //     DB::table('banner')->where('banner_id', $id)
+        //         ->update([
+        //             'banner_topic_picture' => $path
+        //         ]);
+
+        // }
+
         if ($request->hasFile('topic_picture')) {
 
             $file = $request->file('topic_picture');
@@ -109,15 +165,33 @@ class BannerController extends Controller
             // สร้างชื่อกลาง
             $timestamp = now()->format('Ymd_His');
 
-            $folder = "/content/{$menuId}";
+            $folder = "content/{$menuId}"; // path ใน disk 'public'
             $filename = "{$id}_banner_{$timestamp}.{$ext}";
+
+            // บันทึกไฟล์เข้า storage/app/public/content/{menuId}
             $path = $file->storeAs($folder, $filename, 'public');
 
+            // ตั้ง permission ให้ไฟล์ใหม่
+            $fullPath = storage_path('app/public/' . $path);
+            if (file_exists($fullPath)) {
+                chmod($fullPath, 0644);
+            }
+
+            // สำหรับ host ที่ symlink ไม่ทำงาน → copy ไป public/storage
+            $publicStoragePath = public_path('storage/' . $path);
+            if (!file_exists(dirname($publicStoragePath))) {
+                mkdir(dirname($publicStoragePath), 0775, true);
+            }
+            copy($fullPath, $publicStoragePath);
+            chmod($publicStoragePath, 0644);
+
+            // บันทึก path ลง database
             DB::table('banner')->where('banner_id', $id)
                 ->update([
                     'banner_topic_picture' => $path
                 ]);
         }
+
 
 
         return redirect('backend/banner/menu/' . $menuId);
