@@ -94,33 +94,14 @@ class TexteditorController extends Controller
 
         if ($request->hasFile('files')) {
 
-            foreach ($request->file('files') as $key => $files) {
-                // $file = $request->file('files');
-                // $ext = $files->getClientOriginalExtension();
-                // // สร้างชื่อกลาง
-                // $timestamp = now()->format('Ymd_His');
-                // $seq = $key + 1;
-                // $folder = "/content/{$menuId}";
-                // $filename = "";
-                // $filename = "{$id}_{$seq}_{$timestamp}.{$ext}";
-                // $path = $files->storeAs($folder, $filename, 'public');
+            foreach ($request->file('files') as $key => $file) {
 
-                // $data_texteditor_upload = [
-                //     'texteditor_id' => $id,
-                //     'texteditor_upload_seq' => $seq,
-                //     'texteditor_upload_name' => $files->getClientOriginalName(),
-                //     'texteditor_upload_file' => $path,
-                // ];
-
-                // DB::table('texteditor_upload')->insert($data_texteditor_upload);
-
-                $file = $request->file('files');
                 $ext = $file->getClientOriginalExtension();
                 $timestamp = now()->format('Ymd_His');
                 $seq = $key + 1;
-                $folder = "content/{$menuId}"; // path ใน disk 'public'
-                $filename = "";
-                $filename = "{$id}_topic_{$timestamp}.{$ext}";
+
+                $folder = "content/{$menuId}";
+                $filename = "{$id}_list_{$seq}_{$timestamp}.{$ext}";
                 $path = $file->storeAs($folder, $filename, 'public');
 
                 $fullPath = storage_path('app/public/' . $path);
@@ -136,9 +117,9 @@ class TexteditorController extends Controller
                 chmod($publicStoragePath, 0644);
 
                 $data_texteditor_upload = [
-                    'texteditor_id' => $id,
+                    'texteditor_id'        => $id,
                     'texteditor_upload_seq' => $seq,
-                    'texteditor_upload_name' => $files->getClientOriginalName(),
+                    'texteditor_upload_name' => $file->getClientOriginalName(),
                     'texteditor_upload_file' => $path,
                 ];
 
@@ -148,20 +129,22 @@ class TexteditorController extends Controller
 
         if ($request->hasFile('images')) {
 
-            foreach ($request->file('images') as $key => $files) {
-                $file = $request->file('images');
+            foreach ($request->file('images') as $key => $file) {
+
                 $ext = $file->getClientOriginalExtension();
                 $timestamp = now()->format('Ymd_His');
                 $seq = $key + 1;
-                $folder = "content/{$menuId}"; // path ใน disk 'public'
-                $filename = "";
-                $filename = "{$id}_topic_{$timestamp}.{$ext}";
+
+                $folder = "content/{$menuId}";
+                $filename = "{$id}_list_{$seq}_{$timestamp}.{$ext}";
                 $path = $file->storeAs($folder, $filename, 'public');
+
 
                 $fullPath = storage_path('app/public/' . $path);
                 if (file_exists($fullPath)) {
                     chmod($fullPath, 0644);
                 }
+
 
                 $publicStoragePath = public_path('storage/' . $path);
                 if (!file_exists(dirname($publicStoragePath))) {
@@ -170,16 +153,18 @@ class TexteditorController extends Controller
                 copy($fullPath, $publicStoragePath);
                 chmod($publicStoragePath, 0644);
 
+
                 $data_texteditor_upload = [
-                    'texteditor_id' => $id,
-                    'texteditor_upload_seq' => $seq,
-                    'texteditor_upload_name' => $files->getClientOriginalName(),
+                    'texteditor_id'          => $id,
+                    'texteditor_upload_seq'  => $seq,
+                    'texteditor_upload_name' => $file->getClientOriginalName(),
                     'texteditor_upload_file' => $path,
                 ];
 
                 DB::table('texteditor_upload')->insert($data_texteditor_upload);
             }
         }
+
 
         return redirect('backend/list/menu/' . $menuId);
     }
@@ -248,33 +233,14 @@ class TexteditorController extends Controller
 
         if ($request->hasFile('files')) {
 
-            foreach ($request->file('files') as $key => $files) {
-                // $file = $request->file('files');
-                // $ext = $files->getClientOriginalExtension();
-                // // สร้างชื่อกลาง
-                // $timestamp = now()->format('Ymd_His');
-                // $seq = $key + 1;
-                // $folder = "/content/{$menuId}";
-                // $filename = "";
-                // $filename = "{$id}_{$seq}_{$timestamp}.{$ext}";
-                // $path = $files->storeAs($folder, $filename, 'public');
+            foreach ($request->file('files') as $key => $file) {
 
-                // $data_texteditor_upload = [
-                //     'texteditor_id' => $id,
-                //     'texteditor_upload_seq' => $seq,
-                //     'texteditor_upload_name' => $files->getClientOriginalName(),
-                //     'texteditor_upload_file' => $path,
-                // ];
-
-                // DB::table('texteditor_upload')->insert($data_texteditor_upload);
-
-                $file = $request->file('files');
                 $ext = $file->getClientOriginalExtension();
                 $timestamp = now()->format('Ymd_His');
                 $seq = $key + 1;
-                $folder = "content/{$menuId}"; // path ใน disk 'public'
-                $filename = "";
-                $filename = "{$id}_topic_{$timestamp}.{$ext}";
+
+                $folder = "content/{$menuId}";
+                $filename = "{$id}_list_{$seq}_{$timestamp}.{$ext}";
                 $path = $file->storeAs($folder, $filename, 'public');
 
                 $fullPath = storage_path('app/public/' . $path);
@@ -290,9 +256,9 @@ class TexteditorController extends Controller
                 chmod($publicStoragePath, 0644);
 
                 $data_texteditor_upload = [
-                    'texteditor_id' => $id,
+                    'texteditor_id'        => $id,
                     'texteditor_upload_seq' => $seq,
-                    'texteditor_upload_name' => $files->getClientOriginalName(),
+                    'texteditor_upload_name' => $file->getClientOriginalName(),
                     'texteditor_upload_file' => $path,
                 ];
 
@@ -302,20 +268,22 @@ class TexteditorController extends Controller
 
         if ($request->hasFile('images')) {
 
-            foreach ($request->file('images') as $key => $files) {
-                $file = $request->file('images');
+            foreach ($request->file('images') as $key => $file) {
+
                 $ext = $file->getClientOriginalExtension();
                 $timestamp = now()->format('Ymd_His');
                 $seq = $key + 1;
-                $folder = "content/{$menuId}"; // path ใน disk 'public'
-                $filename = "";
-                $filename = "{$id}_topic_{$timestamp}.{$ext}";
+
+                $folder = "content/{$menuId}";
+                $filename = "{$id}_list_{$seq}_{$timestamp}.{$ext}";
                 $path = $file->storeAs($folder, $filename, 'public');
+
 
                 $fullPath = storage_path('app/public/' . $path);
                 if (file_exists($fullPath)) {
                     chmod($fullPath, 0644);
                 }
+
 
                 $publicStoragePath = public_path('storage/' . $path);
                 if (!file_exists(dirname($publicStoragePath))) {
@@ -324,10 +292,11 @@ class TexteditorController extends Controller
                 copy($fullPath, $publicStoragePath);
                 chmod($publicStoragePath, 0644);
 
+
                 $data_texteditor_upload = [
-                    'texteditor_id' => $id,
-                    'texteditor_upload_seq' => $seq,
-                    'texteditor_upload_name' => $files->getClientOriginalName(),
+                    'texteditor_id'          => $id,
+                    'texteditor_upload_seq'  => $seq,
+                    'texteditor_upload_name' => $file->getClientOriginalName(),
                     'texteditor_upload_file' => $path,
                 ];
 
@@ -338,11 +307,11 @@ class TexteditorController extends Controller
         return redirect('backend/list/menu/' . $menuId);
     }
 
-    function delete($menuId, $id)
+    function deletelistid($menuId, $id)
     {
         DB::table('texteditor')->where('texteditor_id', $id)
             ->update([
-                'texteditor_display' => 'A',
+                'texteditor_display' => 'D',
                 'texteditor_date_update' => now()
             ]);
         return redirect('backend/list/menu/' . $menuId);

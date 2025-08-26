@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('backend/add/menu/{menu}', [TexteditorController::class, 'insert'])->name('texteditor.insert');
     Route::get('backend/edit/menu/{menu}/id/{id}', [TexteditorController::class, 'edit'])->name('listedit');
     Route::post('backend/update/menu/{menu}/id/{id}', [TexteditorController::class, 'update'])->name('texteditor.update');
-    Route::get('backend/delete/menu/{menu}/id/{id}', [TexteditorController::class, 'delete'])->name('listdelete.id');
+    Route::get('backend/deletelistid/menu/{menu}/id/{id}', [TexteditorController::class, 'deletelistid'])->name('delete.list');
     Route::get('backend/deletelistfile/menu/{menu}/id/{id}/idfile/{idfile}', [TexteditorController::class, 'deletelistfile'])->name('delete.listfile');
 
     //texteditor
@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('backend/addslide/menu/{menu}', [SlideController::class, 'insertslide'])->name('slide.insert');
     Route::get('backend/editslide/menu/{menu}/id/{id}', [SlideController::class, 'selectslideone'])->name('slideone');
     Route::post('backend/editslide/menu/{menu}/id/{id}', [SlideController::class, 'editslide'])->name('editslideone');
-    Route::get('backend/delete/menu/{menu}/id/{id}', [SlideController::class, 'deleteslide'])->name('deleteslideid');
+    Route::get('backend/deletesilde/menu/{menu}/id/{id}', [SlideController::class, 'deleteslide'])->name('deleteslideid');
 
     //personnel
     Route::get('backend/personnel/menu/{menu}', [PersonnelController::class, 'selectdata'])->name('selectpersonnel');

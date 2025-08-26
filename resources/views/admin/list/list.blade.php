@@ -81,10 +81,8 @@
                                     </a>
 
 
-                                    <a
-                                        href="{{ route('deletebannerone', ['menu' => $menuId, 'id' => $item->texteditor_id]) }}">
-                                        <button type="button" class="btn btn-outline-danger" fdprocessedid="qd81si"
-                                            onclick="return confirm('ต้องการลบบทความหรือไม่')">
+                                    <a href="{{ route('delete.list', ['menu' => $menuId, 'id' => $item->texteditor_id]) }}">
+                                        <button type="button" class="btn btn-outline-danger" fdprocessedid="qd81si" onclick="return confirm('ต้องการลบบทความหรือไม่')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
                                                 fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                 <path
