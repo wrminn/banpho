@@ -57,16 +57,25 @@ class SlideController extends Controller
 
 
         if ($request->hasFile('topic_picture')) {
-
             $file = $request->file('topic_picture');
             $ext = $file->getClientOriginalExtension();
-
-            // สร้างชื่อกลาง
             $timestamp = now()->format('Ymd_His');
 
-            $folder = "/content/{$menuId}";
-            $filename = "{$id}_topicslide_{$timestamp}.{$ext}";
+            $folder = "content/{$menuId}"; // path ใน disk 'public'
+            $filename = "{$id}_slide_{$timestamp}.{$ext}";
             $path = $file->storeAs($folder, $filename, 'public');
+
+            $fullPath = storage_path('app/public/' . $path);
+            if (file_exists($fullPath)) {
+                chmod($fullPath, 0644);
+            }
+
+            $publicStoragePath = public_path('storage/' . $path);
+            if (!file_exists(dirname($publicStoragePath))) {
+                mkdir(dirname($publicStoragePath), 0775, true);
+            }
+            copy($fullPath, $publicStoragePath);
+            chmod($publicStoragePath, 0644);
 
             DB::table('slide')->where('slide_id', $id)
                 ->update([
@@ -102,24 +111,31 @@ class SlideController extends Controller
             ]);
 
         if ($request->hasFile('topic_picture')) {
-
             $file = $request->file('topic_picture');
             $ext = $file->getClientOriginalExtension();
-
-            // สร้างชื่อกลาง
             $timestamp = now()->format('Ymd_His');
 
-            $folder = "/content/{$menuId}";
+            $folder = "content/{$menuId}"; // path ใน disk 'public'
             $filename = "{$id}_slide_{$timestamp}.{$ext}";
             $path = $file->storeAs($folder, $filename, 'public');
+
+            $fullPath = storage_path('app/public/' . $path);
+            if (file_exists($fullPath)) {
+                chmod($fullPath, 0644);
+            }
+
+            $publicStoragePath = public_path('storage/' . $path);
+            if (!file_exists(dirname($publicStoragePath))) {
+                mkdir(dirname($publicStoragePath), 0775, true);
+            }
+            copy($fullPath, $publicStoragePath);
+            chmod($publicStoragePath, 0644);
 
             DB::table('slide')->where('slide_id', $id)
                 ->update([
                     'slide_topic_picture' => $path
                 ]);
         }
-
-
         return redirect('backend/slide/menu/' . $menuId);
     }
 

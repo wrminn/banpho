@@ -28,9 +28,6 @@
                     class="text-blue-600 hover:text-blue-800">
                     ออกจากระบบ
                 </a>
-
-
-
             </div>
         </div>
 
@@ -53,6 +50,8 @@
                 <a href="/backend/listtexteditor/menu/8">บริการขั้นพื้นฐาน</a>
                 <a href="/backend/listtexteditor/menu/9">ยุทธศาสตร์การพัฒนา</a>
             </div>
+            @if (Auth::user()->user_permission == '0')
+            @endif
             <div class="menu-item has-submenu">
                 บุคลากร
                 <i class='bx bx-chevron-right chevron'></i>
@@ -73,6 +72,7 @@
                 <a href="/backend/personnel/menu/22">กองการประปา</a>
                 <a href="/backend/personnel/menu/23">หน่วยตรวจสอบภายใน</a>
             </div>
+
             <?php /*
             <div class="menu-item has-submenu">
                 ผลการดำเนินงาน
@@ -268,6 +268,7 @@
 
     <div class="col">
         <div class="main-content">
+
             @yield('content')
         </div>
     </div>

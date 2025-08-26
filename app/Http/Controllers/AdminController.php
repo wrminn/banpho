@@ -26,6 +26,12 @@ class AdminController extends Controller
 
     function backend()
     {
+        $user = Auth::user();
+        $user->user_name;
+        $user->user_email;
+        $user->user_permission;
+        $user->user_position;
+
         return view('admin.backend');
     }
 
@@ -108,13 +114,23 @@ class AdminController extends Controller
 
             $file = $request->file('file');
             $ext = $file->getClientOriginalExtension();
-
-            // สร้างชื่อกลาง
             $timestamp = now()->format('Ymd_His');
 
-            $folder = "/content/{$menuId}";
-            $filename = "{$list_select->texteditor_id}_default_{$timestamp}.{$ext}";
+            $folder = "content/{$menuId}"; // path ใน disk 'public'
+            $filename = "{$list_select->texteditor_id}_filetexteditor_{$timestamp}.{$ext}";
             $path = $file->storeAs($folder, $filename, 'public');
+
+            $fullPath = storage_path('app/public/' . $path);
+            if (file_exists($fullPath)) {
+                chmod($fullPath, 0644);
+            }
+
+            $publicStoragePath = public_path('storage/' . $path);
+            if (!file_exists(dirname($publicStoragePath))) {
+                mkdir(dirname($publicStoragePath), 0775, true);
+            }
+            copy($fullPath, $publicStoragePath);
+            chmod($publicStoragePath, 0644);
 
             $data_texteditor_upload = [
                 'texteditor_id' => $list_select->texteditor_id,
@@ -136,5 +152,4 @@ class AdminController extends Controller
             ]);
         return redirect('backend/listtexteditor/menu/' . $menuId);
     }
-
 }

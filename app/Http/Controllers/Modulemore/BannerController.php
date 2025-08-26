@@ -109,7 +109,6 @@ class BannerController extends Controller
                 ]);
         }
 
-
         return redirect('backend/banner/menu/' . $menuId);
     }
 
@@ -191,8 +190,6 @@ class BannerController extends Controller
                     'banner_topic_picture' => $path
                 ]);
         }
-
-
 
         return redirect('backend/banner/menu/' . $menuId);
     }

@@ -20,83 +20,38 @@
             </caption>
             <div class="card-body">
 
-                <form class="" action="{{ route('texteditor.update', ['menu' => $menuId, 'id' => $id]) }}"
+                <form class="" action="{{ route('editpersonnelone', ['menu' => $menuId, 'id' => $id]) }}"
                     method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
-                                <label class="form-label">วันที่</label>
-                                <input type="date" name="date" class="form-control" required
-                                    value="{{ $list->texteditor_date_show }}">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
 
-                                <label for="slot" class="form-label">รูปหัวข้อ
-                                    @if (!empty($list->texteditor_topic_picture))
-                                        <img src="{{ asset('storage/' . $list->texteditor_topic_picture) }}" width="10%" accept="image/*">
+                                <label for="slot" class="form-label">รูปบุคลากร
+                                    @if (!empty($list->personnel_path))
+                                        <img src="{{ asset('storage/' . $list->personnel_path) }}" width="10%"
+                                            accept="image/*">
                                     @endif
                                 </label>
-                                <input type="file" class="form-control" name="topic_picture">
+                                <input type="file" class="form-control" name="personnel_img">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="floor" class="form-label">หัวข้อ</label>
-                        <input type="text" class="form-control" name="topic" required
-                            value="{{ $list->texteditor_title }}">
+                        <label for="floor" class="form-label">ชื่อ-นามสกุล</label>
+                        <input type="text" class="form-control" name="name" required
+                            value="{{ $list->personnel_name }}">
                     </div>
-
                     <div class="mb-3">
-                        <label for="slot" class="form-label">เนื้อหา</label>
-                        <textarea class="form-control" name="detail" id="" cols="30" rows="6">{{ $list->texteditor_detail ?? '' }}</textarea>
+                        <label for="floor" class="form-label">เบอร์โทรศัพท์</label>
+                        <input type="text" class="form-control" name="tel" required
+                            value="{{ $list->personnel_tel }}">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label">เพิ่มรูปภาพ (สูงสุด 20 รูป)</label>
-                                <input type="file" id="images" name="images[]" class="form-control" accept="image/*"
-                                    multiple>
-                                <small class="text-muted">อัพโหลดได้สูงสุด 20 รูป</small>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mb-3">
-                                <label class="form-label">เพิ่มไฟล์เอกสาร (สูงสุด 5 ไฟล์)</label>
-                                <input type="file" id="files" name="files[]" class="form-control"
-                                    accept=".doc,.docx,.pdf,.xls,.xlsx" multiple>
-                                <small class="text-muted">รองรับเฉพาะ .doc, .docx, .pdf, .xls, .xlsx สูงสุด 5 ไฟล์</small>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="floor" class="form-label">ตำแหน่ง</label>
+                        <input type="text" class="form-control" name="position" required
+                            value="{{ $list->personnel_position }}">
                     </div>
-
-                    @if (!empty($file))
-
-                        <div class="col">
-                            <div class="mb-3">
-                                <label for="slot" class="form-label">รายการไฟล์</label>
-                                @foreach ($file as $item)
-                                    <div class="filedetail">
-                                        <a href="{{ asset('storage/' . $item->texteditor_upload_file) }}"
-                                            target="_blank">{{ $item->texteditor_upload_name }}
-                                            <a href="{{ route('delete.listfile', ['menu' => $menuId, 'id' => $item->texteditor_id, 'idfile' => $item->texteditor_upload_id]) }}"
-                                                onclick="return confirm('ต้องการลบไฟล์นี้ใช่หรือไม่')"
-                                                style="color:brown">&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                                                    fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-
-                    @endif
 
                     <button class="btn btn-success" type="submit" name="insert">
                         บันทึก

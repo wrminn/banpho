@@ -63,7 +63,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('backend/addpersonnel/menu/{menu}', [PersonnelController::class, 'insertpersonnel'])->name('personnel.insert');
     Route::get('backend/editpersonnel/menu/{menu}/id/{id}', [PersonnelController::class, 'selectpersonnelid'])->name('personnel.edit');
     Route::post('backend/editpersonnel/menu/{menu}/id/{id}', [PersonnelController::class, 'editpersonnel'])->name('editpersonnelone');
-    Route::get('backend/delete/menu/{menu}/id/{id}', [PersonnelController::class, 'deletepersonnel'])->name('deletepersonnelid');
+    Route::get('backend/deletepersonnel/menu/{menu}/id/{id}', [PersonnelController::class, 'deletepersonnel'])->name('deletepersonnelid');
 
     Route::get('backend/personnelseq/menu/{menu}', [PersonnelController::class, 'selectdataseq']);
     Route::post('backend/personnelseq/menu/{menu}', [PersonnelController::class, 'updateseqpersonnel'])->name('updateseqpersonnel');
