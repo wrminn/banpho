@@ -1,23 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+    <section class="box-personnel">
+        <div class="b-vision">
+            <div class="text-vission">
+                <span class="chip">SMART CITY : วิสัยทัศน์</span>
+                <div class="scroll-container">
+                    <span class="scroll-text">ทดสอบข้อมูลแสดงวิสัยทัศน์</span>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection

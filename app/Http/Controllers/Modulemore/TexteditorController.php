@@ -34,6 +34,7 @@ class TexteditorController extends Controller
         $list = Texteditor::active()
             ->where('texteditor_menu', $menuId)
             ->paginate(20);
+            
         $startIndex = ($list->currentPage() - 1) * $list->perPage() + 1;
 
         return view('admin.list.list', compact('title', 'list', 'menuId', 'startIndex'));

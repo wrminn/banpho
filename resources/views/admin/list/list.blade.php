@@ -62,7 +62,7 @@
                             <tr>
                                 <th scope="row">{{ $startIndex + $loop->index }}</th>
                                 <td>{{ Str::limit($item->texteditor_title, 30) }}</td>
-                                <td>{{ $item->texteditor_date_show }}</td>
+                                <td>{{ $item->texteditor_date_show_buddhist }}</td>
                                 <td>
                                     <a href="{{ route('listedit', ['menu' => $menuId, 'id' => $item->texteditor_id]) }}">
 
