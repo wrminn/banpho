@@ -7,6 +7,7 @@ use App\Http\Controllers\Modulemore\TexteditorController;
 use App\Http\Controllers\Modulemore\BannerController;
 use App\Http\Controllers\Modulemore\SlideController;
 use App\Http\Controllers\Modulemore\PersonnelController;
+use App\Http\Controllers\ComplaintController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -78,3 +79,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('backend/personnelseq/menu/{menu}', [PersonnelController::class, 'selectdataseq']);
     Route::post('backend/personnelseq/menu/{menu}', [PersonnelController::class, 'updateseqpersonnel'])->name('updateseqpersonnel');
 });
+
+Route::get('complaint/menu/{menu}', [ComplaintController::class, 'index'])->name('complaint');

@@ -87,20 +87,19 @@ class AdminController extends Controller
                     'texteditor_detail' => $request->detail
                 ]);
         } else {
-            $data_texteditor = [
+            
+            $id = DB::table('texteditor')->insertGetId([
                 'texteditor_title' => $title,
                 'texteditor_category_id' =>  $category ? $category : 0,
                 'texteditor_menu' => $menuId,
-            ];
-            DB::table('texteditor')->insert($data_texteditor);
-
-            $list_select = DB::table('texteditor')
-                ->where('texteditor_menu', $menuId)
-                ->first();
+                'texteditor_date_insert' => now(),
+                
+            ]);
 
             $data_texteditor_detail = [
                 'texteditor_detail' => $request->detail,
-                'texteditor_id' => $list_select->texteditor_id,
+                'texteditor_id' => $id,
+                'texteditor_detail_seq' => '1',
             ];
             DB::table('texteditor_detail')->insert($data_texteditor_detail);
         }

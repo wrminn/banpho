@@ -1,6 +1,7 @@
 @extends('admin.layout')
 @section('title', $title)
 @section('content')
+
     <div class="container">
         <div class="card">
             <caption>
@@ -25,7 +26,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="slot" class="form-label">เนื้อหา</label>
-                        <textarea class="form-control" name="detail" id="" cols="30" rows="15">{{ $list->texteditor_detail ?? '' }}</textarea>
+                        <textarea class="form-control" name="detail" id="editor" cols="50" rows="15">{{ $list->texteditor_detail ?? '' }}</textarea>
                     </div>
                     @if (!empty($file))
 
@@ -34,8 +35,9 @@
                                 <label for="slot" class="form-label">รายการไฟล์</label>
                                 @foreach ($file as $item)
                                     <div class="filedetail">
-                                        <a href="{{ asset('storage/' .$item->texteditor_upload_file) }}" target="_blank">{{ $item->texteditor_upload_name }}
-                                            <a href="{{ route('delete.filetexteditor', ['menu' => $menuId,'id' => $item->texteditor_upload_id,]) }}"
+                                        <a href="{{ asset('storage/' . $item->texteditor_upload_file) }}"
+                                            target="_blank">{{ $item->texteditor_upload_name }}
+                                            <a href="{{ route('delete.filetexteditor', ['menu' => $menuId, 'id' => $item->texteditor_upload_id]) }}"
                                                 onclick="return confirm('ต้องการลบไฟล์นี้ใช่หรือไม่')"
                                                 style="color:brown">&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
@@ -65,6 +67,27 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
+    <script>
+        $('#editor').summernote({
+            placeholder: 'เขียนเนื้อหาที่นี่...',
+            tabsize: 2,
+            height: 300,
+            toolbar: [
+                // จัดชุดเครื่องมือเอง โดยไม่ใส่ picture และ video
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link', 'table']], // เอา picture / video ออก
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 
 @endsection

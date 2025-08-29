@@ -10,6 +10,7 @@
     {{-- <link rel="stylesheet" href="style.css"> --}}
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/menu/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 
 </head>
 
@@ -147,12 +148,14 @@
                 <i class='bx bx-chevron-right chevron'></i>
             </div>
             <div class="submenu level-1">
-                <a href="35">รับเเจ้งเรื่องราวร้องเรียนร้องทุกข์</a>
-                <a href="36">รับเเจ้งเรื่องราวร้องเรียนการทุจริต</a>
+                <a href="#">รับเเจ้งเรื่องราวร้องเรียนร้องทุกข์</a>
+                <a href="#">รับเเจ้งเรื่องราวร้องเรียนการทุจริต</a>
+                {{-- <a href="35">รับเเจ้งเรื่องราวร้องเรียนร้องทุกข์</a>
+                <a href="36">รับเเจ้งเรื่องราวร้องเรียนการทุจริต</a> --}}
                 <a href="/backend/list/menu/37">รายงานผลสำรวจความพึงพอใจในการให้บริการ</a>
                 <a href="/backend/listcat/menu/38/cate/0">คู่มืออื่นๆ</a>
                 <a href="/backend/list/menu/39">เอกสารดาวน์โหลด</a>
-                <a href="40">ยื่นคำร้องออนไลน์ E-service</a>
+                <a href="#">ยื่นคำร้องออนไลน์ E-service</a>
                 <a href="/backend/list/menu/41">คำถามที่พบบ่อย</a>
             </div>
             <div class="menu-item has-submenu">
@@ -169,9 +172,12 @@
                 <i class='bx bx-chevron-right chevron'></i>
             </div>
             <div class="submenu">
-                <a href="/backend/banner/menu/45">แบนเนอร์ภายใน</a>
+                <a href="/backend/banner/menu/45">แบนเนอร์แนะนำ</a>
+                <a href="/backend/banner/menu/66">แบนเนอร์ภายนอก</a>
+                <a href="/backend/banner/menu/67">แบนเนอร์ภายใน</a>
             </div>
-            <a href="46">
+            {{-- <a href="46"> --}}
+            <a href="#">
                 <div class="menu-item">POP UP</div>
             </a>
             <a href="/backend/slide/menu/47">
@@ -195,13 +201,16 @@
             <a href="/backend/list/menu/53">
                 <div class="menu-item">ข่าวประชาสัมพันธ์</div>
             </a>
-            <a href="54">
+            {{-- <a href="54"> --}}
+            <a href="#">
                 <div class="menu-item">แบบสำรวจความคิดเห็น</div>
             </a>
-            <a href="55">
+            {{-- <a href="55"> --}}
+            <a href="#">
                 <div class="menu-item">ติดต่อ</div>
             </a>
-            <a href="56">
+            {{-- <a href="56"> --}}
+            <a href="#">
                 <div class="menu-item">กระดานสนทนา</div>
             </a>
 

@@ -53,7 +53,7 @@
 
                 <div class="mb-3">
                     <label for="slot" class="form-label">เนื้อหา</label>
-                    <textarea class="form-control" name="detail" id="" cols="30" rows="6"></textarea>
+                    <textarea class="form-control" name="detail" id="editor" cols="30" rows="6"></textarea>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -100,6 +100,29 @@
                 alert("❌ เลือกไฟล์เอกสารได้สูงสุด 5 ไฟล์เท่านั้น");
                 this.value = ""; // reset input
             }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+    <script>
+        $('#editor').summernote({
+            placeholder: 'เขียนเนื้อหาที่นี่...',
+            tabsize: 2,
+            height: 300,
+            toolbar: [
+                // จัดชุดเครื่องมือเอง โดยไม่ใส่ picture และ video
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link', 'table']], // เอา picture / video ออก
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
         });
     </script>
 @endsection
