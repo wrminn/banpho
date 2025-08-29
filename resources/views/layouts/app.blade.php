@@ -28,8 +28,8 @@
                 <!-- ตำแหน่งโลโก้และข้อความ -->
                 <div class="carousel-brand">
                     <img src="{{ asset('/storage/detailweb/logo.png') }}" alt="Logo">
-                    <span>เทศบาลตำบลท่าข้าม
-                        <p>Tha Kham Subdistrict Municipality</p>
+                    <span>เทศบาลตำบลบ้านโพธิ์
+                        <p>Ban Pho Subdistrict Municipality</p>
                     </span>
                 </div>
 
